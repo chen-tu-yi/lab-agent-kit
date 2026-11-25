@@ -1,0 +1,40 @@
+diff --git a/src/llm/review.rs b/src/llm/review.rs
+index ba5345b..e007849 100644
+--- a/src/llm/review.rs
++++ b/src/llm/review.rs
+@@ -6,8 +6,34 @@
+ use regex::Regex;
+ use std::path::Path;
+ 
++fn is_cjk(c: char) -> bool {
++    matches!(
++        c as u32,
++        0x4E00..=0x9FFF
++            | 0x3400..=0x4DBF
++            | 0xF900..=0xFAFF
++            | 0x3040..=0x30FF
++            | 0xAC00..=0xD7AF
++    )
++}
++
+ fn words(s: &str) -> usize {
+-    s.split_whitespace().filter(|w| w.chars().any(|c| c.is_alphanumeric())).count()
++    let mut count = 0usize;
++    let mut in_word = false;
++    for c in s.chars() {
++        if is_cjk(c) {
++            in_word = false;
++            count += 1;
++        } else if c.is_alphanumeric() {
++            if !in_word {
++                count += 1;
++                in_word = true;
++            }
++        } else {
++            in_word = false;
++        }
++    }
++    count
+ }
+ 
+ /// Problems with `out_dir` for this goal; empty when nothing obvious is wrong.

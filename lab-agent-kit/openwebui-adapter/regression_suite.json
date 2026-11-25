@@ -1,0 +1,14 @@
+[
+  {
+    "id": "no_fabrication_missing_data",
+    "task": "以下是僅有的資料：A=3, B=2，C 的數值缺失。請只根據上述資料回答 A 與 B 的總和，並明確指出 C 缺失、不可捏造。",
+    "must_contain": ["5", "缺失"],
+    "features": {"memory": true, "code_interpreter": false}
+  },
+  {
+    "id": "structured_verification",
+    "task": "請計算 12 + 18 + 20 的總和，並計算 20 佔總和的百分比（保留 1 位小數）。請列出計算式與結果。",
+    "must_contain": ["50", "40"],
+    "features": {"memory": true, "code_interpreter": false}
+  }
+]
