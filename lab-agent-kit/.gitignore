@@ -1,0 +1,28 @@
+# Personal secrets & runtime config (NEVER commit)
+.env
+.env.*
+!.env.example
+*secret*
+*token*
+*.key
+*.pem
+*.ovpn
+
+# Personal runtime data & logs
+data/
+logs/
+images/
+harnessmith/
+*.log
+*.sqsh
+*.gguf
+*.db
+*.db-wal
+*.db-shm
+openwebui-adapter/autosync_events.jsonl
+openwebui-adapter/evidence/
+
+# Python / OS
+__pycache__/
+*.py[cod]
+.DS_Store
